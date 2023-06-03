@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.home, name='home')
+    path('', views.home, name='home'),
+    path('photos/<int:album_id>', views.photos, name='photos')
 ]
 
 if settings.DEBUG:
