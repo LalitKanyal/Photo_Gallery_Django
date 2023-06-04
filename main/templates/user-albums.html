@@ -30,7 +30,7 @@
                             <td><a href="#" class="btn btn-sm btn-info">{{ album.total_photos }}</a></td>
                             <td>
                                 <a href="{% url 'update-album' album.id %}" class="btn btn-sm btn-primary">Edit</a>
-                                <a class="btn btn-sm btn-danger" onclick="return confirm('Delete this album? It will also delete all photos of this album?')" href="#">Delete</a>
+                                <a class="btn btn-sm btn-danger" onclick="return confirm('Delete this album? It will also delete all photos of this album?')" href="{% url 'delete-album' album.id %}">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}

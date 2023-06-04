@@ -12,6 +12,7 @@ urlpatterns = [
     path('user-albums', views.user_albums,name='user-albums'),
     path('add-album', views.add_album,name='add-album'),
     path('update-album/<int:id>',views.update_album,name='update-album'),
+    path('delete-album/<int:id>',views.delete_album,name='delete-album'),
 ]
 
 if settings.DEBUG:

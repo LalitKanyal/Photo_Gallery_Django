@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display=['title', 'image_tag']
+    list_display=['title', 'image_tag', 'user']
 
 admin.site.register(models.Album, AlbumAdmin)
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Album, Photos
 from django.db.models import Count
 # showing dashboard after login
@@ -71,4 +71,10 @@ def update_album(request,id):
 	form=AlbumForm(instance=album)
 	return render(request, 'update-album.html',{'form':form,'msg':msg})
 
+# Delete Album
 
+@login_required
+
+def delete_album(request, id):
+	Album.objects.filter(id=id).delete()
+	return redirect('user-albums')
