@@ -5,10 +5,10 @@
         <!-- <h3 class="my-3"><span class="text-danger">Album List</span><a href="#" class="btn btn-sm btn-success">Add Album</a></h3> -->
         <div class="row justify-content-between">
             <div class="col-auto">
-                <h3 class="my-3"><span class="text-danger">Album List</span></h3>
+                <h3 class="my-3"><span class="text-danger">{{album.title}} Photos List</span></h3>
             </div>
             <div class="col-auto">
-                <a href="{% url 'add-album' %}" class="btn btn-sm btn-success">Add Album</a>
+                <a href="{% url 'add-photo' album.id %}" class="btn btn-sm btn-success">Add Photo</a>
             </div>
         </div>
         
@@ -16,21 +16,20 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>AlbumName</th>
-                    <th>TotalPhotos</th>
+                    <th>Photo</th>
+                    <th>AltText</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% if data %}
-                    {% for album in data %}
+                    {% for photo in data %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ album.title }}</td>
-                            <td><a href="{% url 'photo-list' album.id %}" class="btn btn-sm btn-info">{{ album.total_photos }}</a></td>
+                            <td><img src="{{photo.image.url }}" width="100" height="100"/></td>
+                            <td>{{ photo.alt_text }}</td>
                             <td>
-                                <a href="{% url 'update-album' album.id %}" class="btn btn-sm btn-primary">Edit</a>
-                                <a class="btn btn-sm btn-danger" onclick="return confirm('Delete this album? It will also delete all photos of this album?')" href="{% url 'delete-album' album.id %}">Delete</a>
+                                <a class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this photo?')" href="{% url 'delete-photo' photo.album.id photo.id %}">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}

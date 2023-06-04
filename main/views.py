@@ -5,7 +5,7 @@ from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 
 # Form
-from .forms import AlbumForm
+from .forms import AlbumForm, PhotoForm
 
 # User SignUp
 from django.contrib.auth.forms import UserCreationForm
@@ -74,7 +74,37 @@ def update_album(request,id):
 # Delete Album
 
 @login_required
-
 def delete_album(request, id):
 	Album.objects.filter(id=id).delete()
 	return redirect('user-albums')
+
+# Photo List
+
+@login_required
+def photo_list(request, album_id):
+	album=Album.objects.get(id=album_id)
+	photos=Photos.objects.filter(album=album)
+	return render(request, 'photo-list.html',{'data':photos, 'album':album})
+
+# Add Photo
+    
+@login_required
+def add_photo(request, album_id):
+	album=Album.objects.get(id=album_id)
+	msg=''
+	if request.method=='POST':
+		form=PhotoForm(request.user,request.POST,request.FILES)
+		if form.is_valid():
+			saveForm = form.save(commit=False)
+			saveForm.save()
+			msg='Photo has been Added Successfully'
+			return redirect('/photo-list/'+str(album_id))
+	form=PhotoForm(request.user)
+	return render(request, 'add-photo.html',{'form':form,'msg':msg,'album':album})
+
+# Delete Photo
+
+@login_required
+def delete_photo(request,album_id,photo_id):
+	Photos.objects.filter(id=photo_id).delete()
+	return redirect('/photo-list/'+str(album_id))
