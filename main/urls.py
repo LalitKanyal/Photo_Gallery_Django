@@ -8,6 +8,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('photos/<int:album_id>', views.photos, name='photos'),
 	path('accounts/signup',views.signup,name='signup'),
+	path('dashboard',views.dashboard,name='dashboard'),
+    path('user-albums', views.user_albums,name='user-albums')
 ]
 
 if settings.DEBUG:
