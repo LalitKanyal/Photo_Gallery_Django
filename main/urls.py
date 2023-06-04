@@ -9,7 +9,9 @@ urlpatterns = [
     path('photos/<int:album_id>', views.photos, name='photos'),
 	path('accounts/signup',views.signup,name='signup'),
 	path('dashboard',views.dashboard,name='dashboard'),
-    path('user-albums', views.user_albums,name='user-albums')
+    path('user-albums', views.user_albums,name='user-albums'),
+    path('add-album', views.add_album,name='add-album'),
+    path('update-album/<int:id>',views.update_album,name='update-album'),
 ]
 
 if settings.DEBUG:
