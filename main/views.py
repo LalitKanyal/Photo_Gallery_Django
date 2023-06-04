@@ -11,7 +11,7 @@ from .forms import AlbumForm, PhotoForm
 from django.contrib.auth.forms import UserCreationForm
 
 def home(request):
-    data=Album.objects.annotate(total_photos=Count('photos')).all()
+    data=Album.objects.annotate(total_photos=Count('photos')).filter(status=True)
     return render(request, 'home.html', {'data':data})
 
 # Photos

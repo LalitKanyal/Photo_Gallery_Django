@@ -10,7 +10,7 @@ class Album(models.Model):
     album_image = models.ImageField(upload_to="album_images/", null=True)
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     title=models.CharField(max_length=150)
-
+    status=models.BooleanField(default=True)
     class Meta:
         verbose_name_plural = '1. Albums'
 
